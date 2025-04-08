@@ -1,11 +1,12 @@
 from typing import Literal
 
 import torch
-from homework.dataset import CIFAR10Dataset
 from loguru import logger
 from sklearn.metrics import accuracy_score
 from torch import nn
 from torch.utils.data import DataLoader
+
+from short_research_project.dataset import CIFAR10Dataset
 
 
 def train_linear_probe_model(
@@ -21,7 +22,6 @@ def train_linear_probe_model(
 ):
     train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     eval_dataloader = DataLoader(eval_dataset, batch_size=batch_size, shuffle=True)
-    # test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
 
     loss_fn = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(linear_probe_model.parameters(), lr=learning_rate)
@@ -57,7 +57,7 @@ def train_linear_probe_model(
 
         # -------------------------------------------------
         # Evaluate
-        logger.info("Evaluating in test_dataset")
+        logger.info("Evaluating in eval_dataset")
 
         y_true = []
         y_pred = []
@@ -82,11 +82,13 @@ def train_linear_probe_model(
 
                 if batch_idx % log_every_n_steps == 0:
                     logger.info(
-                        f"[Test] Epoch {epoch + 1} | Batch {batch_idx + 1} | "
+                        f"[Eval] Epoch {epoch + 1} | Batch {batch_idx + 1} | "
                         "accuracy = "
                         f"{accuracy_score(y.cpu().tolist(), pred.cpu().tolist())}"
                     )
 
         logger.info(
-            f"[Test] Epoch {epoch + 1} accuracy: {accuracy_score(y_true, y_pred)}"
+            f"[Eval] Epoch {epoch + 1} accuracy: {accuracy_score(y_true, y_pred)}"
         )
+
+    return linear_probe_model
