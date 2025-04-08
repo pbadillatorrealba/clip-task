@@ -88,10 +88,10 @@ def get_evaluation_dataframe(
         .rename(
             columns={
                 "class": "Class",
-                "scores_clip": "CLIP",
+                "scores_clip": "Zero-Shot",
                 "scores_linear_probe": "Linear Probe",
-                "scores_prompted": "Prompted CLIP",
-                "scores_prompted_2": "Prompted CLIP 2",
+                "scores_prompted": "Prompting (Template 1)",
+                "scores_prompted_2": "Prompting (Template 2)",
             }
         )
         .set_index("Class")
