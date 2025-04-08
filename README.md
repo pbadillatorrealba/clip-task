@@ -43,17 +43,17 @@ Then, to generate the environment and install the dependencies, use:
 uv sync
 ```
 
-After this, you can run jupyterlab, where you will be able to execute the notebook.
+After this, you can run jupyterlab, where you will be able to execute the `notebooks/results.ipynb` notebook.
 
 ```bash
-jupyterlab
+uv run jupyter-lab
 ```
 
 ## Code Quality and Continuous Integration
 
 This repository enforces code quality and consistency through the use of `ruff` for linting and formatting, and `pre-commit` for managing pre-commit hooks.
 
-**ruff:** We utilize `ruff`, an extremely fast Python linter and formatter, to automatically identify and fix potential code style issues and errors. This helps maintain a clean and consistent codebase. The `ruff` configuration can be found in the `pyproject.toml` file.
+**ruff:** I use `ruff`, an extremely fast Python linter and formatter, to automatically identify and fix potential code style issues and errors. This helps maintain a clean and consistent codebase. The `ruff` configuration can be found in the `pyproject.toml` file.
 
 **pre-commit:** To ensure that code adheres to the defined style and quality standards before it's even committed, `pre-commit` is used. This framework allows us to configure and run checks (including `ruff`) automatically on staged files. To use pre-commit locally, please install it using:
 
@@ -73,4 +73,4 @@ Once installed, pre-commit will run automatically before each git commit. If any
 
 To guarantee that all code pushed to the repository meets our quality standards, a GitHub Actions workflow was implemented. This workflow automatically runs the pre-commit checks on every pull request and push to the repository. This ensures that only verified and compliant code is merged, maintaining the overall quality and stability of the project.
 
-You can find the CI configuration in the .github/workflows directory.
+You can find the CI configuration in the `.github/workflows` directory.
